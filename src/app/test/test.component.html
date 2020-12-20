@@ -1,0 +1,513 @@
+<div fxLayout="row" fxLayoutAlign="space-around">
+  <div>
+    <button
+      (click)="menu = true; edit=true"
+      mat-raised-button
+      style="background-color: black; color:rgb(236, 219, 219); margin-top: 30px;"
+    >
+      Create
+    </button>
+    <div  fxLayout="column">
+        <mat-card
+        class="card3"
+        style="padding: 0 0 14px 0; width: 600px; height: 500px;"
+
+      >
+        <mat-card-title style="color: white; padding: 1em; text-align: center;">
+          Projects
+        </mat-card-title>
+        <mat-card-content
+          fxLayout="row"
+          fxLayoutAlign="center"
+          style="padding: 16px; "
+
+        >
+        <mat-card
+        class="card3"
+        style="padding: 0 0 14px 0; width: 600px; height: 200px;"
+        *ngFor="let project of projects"
+
+      >
+        <mat-card-title *ngIf="project.projectTitle" style="color: white; padding: 1em; text-align: center;">
+          {{project.projectTitle}}
+        </mat-card-title>
+        <mat-card-content
+        *ngIf="project.projectTitle"
+          fxLayout="row"
+          fxLayoutAlign="center"
+          style="padding: 16px; "
+
+        >
+        <div>
+            {{project.projectObjectives}}
+            <button  mat-raised-button
+            style="background-color: black; color:rgb(236, 219, 219); margin-top: 30px;" (click)="edit=false; editDialog(project) ">
+              Edit
+            </button>
+        </div>
+
+        </mat-card-content>
+        <mat-card-title *ngIf="project.introduction" style="color: white; padding: 1em; text-align: center;">
+            {{project.introduction}}
+          </mat-card-title>
+          <mat-card-content
+          *ngIf="project.introduction"
+            fxLayout="row"
+            fxLayoutAlign="center"
+            style="padding: 16px; "
+
+          >
+          <div>
+              {{project.introduction}}
+              <button  mat-raised-button
+              style="background-color: black; color:rgb(236, 219, 219); margin-top: 30px;" (click)="edit=false; editDialog(project) ">
+                Edit
+              </button>
+          </div>
+
+          </mat-card-content>
+
+      </mat-card>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div *ngIf="menu && edit" class="card">
+    <mat-card
+      class="card3"
+      style="padding: 0 0 14px 0; width: 600px; height: 200px;"
+    >
+      <mat-card-title style="color: white; padding: 1em; text-align: center;">
+        SDLC Phase
+      </mat-card-title>
+      <mat-card-content
+        fxLayout="row"
+        fxLayoutAlign="center"
+        style="padding: 16px; "
+      >
+        <form class="example-form">
+          <mat-form-field style="width: 100%;" appearance="fill">
+            <mat-label>SDLC Phase</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let food of options" (click)="value = food.value " [value]="food.value">
+                {{ food.text }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+    </mat-card>
+    <div fxLayout="column">
+      <mat-card
+        *ngIf="value == 1"
+        class="card3"
+        style="padding: 0 0 14px 0; width: 600px; height: 800px;"
+      >
+        <mat-card-title style="color: white; padding: 1em; text-align: center;">
+          Project Charter
+        </mat-card-title>
+        <mat-card-content
+          fxLayout="row"
+          fxLayoutAlign="center"
+          style="padding: 16px; "
+        >
+          <form class="example-form">
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <span
+                style="font-size: 20px; font-weight: bold; margin-top: 20px;"
+              >
+                Project Title
+              </span>
+              <mat-form-field appearance="fill">
+
+                <input  [(ngModel)]="projectCharter.projectTitle" name="projectTitle"  matInput />
+              </mat-form-field>
+            </div>
+
+            <br />
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <span
+                style="font-size: 20px; font-weight: bold; margin-top: 20px;"
+              >
+                Project Start Date
+              </span>
+              <mat-form-field style="width: 200px;" appearance="fill">
+                  <mat-label>Choose a date</mat-label>
+                  <input  [(ngModel)]="projectCharter.startDate" name="startDate" matInput [matDatepicker]="picker">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <br />
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <span
+                style="font-size: 20px; font-weight: bold; margin-top: 20px;"
+              >
+                Project Finish Date
+              </span>
+              <mat-form-field style="width: 200px;" appearance="fill">
+                  <mat-label>Choose a date</mat-label>
+                  <input  [(ngModel)]="projectCharter.finishDate" name="finishDate" matInput [matDatepicker]="picker2">
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <br />
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <span
+                style="font-size: 20px; font-weight: bold; margin-top: 20px;"
+              >
+                Project Objectives
+              </span>
+              <mat-form-field  appearance="fill">
+
+                <input [(ngModel)]="projectCharter.projectObjectives" name="projectObjectives" matInput />
+              </mat-form-field>
+            </div>
+            <br />
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <span
+                style="font-size: 20px; font-weight: bold; margin-top: 20px;"
+              >
+                Project Manager
+              </span>
+              <mat-form-field  appearance="fill">
+
+                <input [(ngModel)]="projectCharter.projectManager" name="projectManager" matInput />
+              </mat-form-field>
+            </div>
+            <br />
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <span
+                style="font-size: 20px; font-weight: bold; margin-top: 20px;"
+              >
+                Project Information
+              </span>
+              <mat-form-field appearance="fill">
+
+                <input [(ngModel)]="projectCharter.projectInformation" name="projectInformation" matInput />
+              </mat-form-field>
+            </div>
+            <br />
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <span
+                style="font-size: 20px; font-weight: bold; margin-top: 20px;"
+              >
+                Project Space Statments
+              </span>
+              <mat-form-field appearance="fill">
+
+                <input [(ngModel)]="projectCharter.projectSpaceStatments" name="projectSpaceStatments" matInput />
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-around">
+              <button mat-raised-button (click)="log(); addProjectCharter()"
+              style="background-color: black; color:rgb(236, 219, 219); margin-top: 30px;">
+                Save
+              </button>
+              <button mat-raised-button (click)="resetProject()"
+              style="background-color: black; color:rgb(236, 219, 219); margin-top: 30px;" >
+                  Reset
+                </button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+      <mat-card
+        *ngIf="value == 2"
+        class="card3"
+        style="padding: 0 0 14px 0; width: 600px; height: 800px;"
+      >
+        <mat-card-title style="color: white; padding: 1em; text-align: center;">
+          Software Requirements Specification (SRS)
+        </mat-card-title>
+        <mat-card-content
+          fxLayout="row"
+          fxLayoutAlign="center"
+          style="padding: 16px; "
+        >
+          <form class="example-form">
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <span
+                style="font-size: 20px; font-weight: bold; margin-top: 20px;"
+              >
+                Introduction
+              </span>
+              <mat-form-field appearance="fill">
+
+                <input [(ngModel)]="srs.introduction" name="introduction" matInput />
+              </mat-form-field>
+            </div>
+
+            <br />
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <span
+                style="font-size: 20px; font-weight: bold; margin-top: 20px;"
+              >
+                Purpose of software being developed
+              </span>
+              <mat-form-field appearance="fill">
+
+                  <input [(ngModel)]="srs.posb" name="posb" matInput />
+                </mat-form-field>
+            </div>
+            <br />
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <span
+                style="font-size: 20px; font-weight: bold; margin-top: 20px;"
+              >
+                Intendend Audience
+              </span>
+              <mat-form-field appearance="fill">
+
+                  <input [(ngModel)]="srs.ia" name="ia" matInput />
+                </mat-form-field>
+            </div>
+            <br />
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <span
+                style="font-size: 20px; font-weight: bold; margin-top: 20px;"
+              >
+                Overall description of the software
+              </span>
+              <mat-form-field appearance="fill">
+
+                <input [(ngModel)]="srs.ods" name="ods" matInput />
+              </mat-form-field>
+            </div>
+            <br />
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <span
+                style="font-size: 20px; font-weight: bold; margin-top: 20px;"
+              >
+                System Features and Requirements
+              </span>
+              <mat-form-field appearance="fill">
+                  <mat-label>Textarea</mat-label>
+                  <textarea [(ngModel)]="srs.sfr" name="sfr" matInput></textarea>
+                </mat-form-field>
+            </div>
+            <br />
+
+            <div fxLayout="row" fxLayoutAlign="space-around">
+                <button mat-raised-button (click)="log(); addSRS()"
+                style="background-color: black; color:rgb(236, 219, 219); margin-top: 30px;">
+                  Save
+                </button>
+                <button mat-raised-button (click)="resetSRS()"
+                style="background-color: black; color:rgb(236, 219, 219); margin-top: 30px;" >
+                    Reset
+                  </button>
+              </div>
+          </form>
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div *ngIf="!edit" style="margin-top: 65px;" class="card">
+      <mat-card
+      *ngIf="projectN.projectTitle"
+        class="card3"
+        style="padding: 0 0 14px 0; width: 600px; height: 800px;"
+      >
+        <mat-card-title style="color: white; padding: 1em; text-align: center;">
+          Project Charter
+        </mat-card-title>
+        <mat-card-content
+          fxLayout="row"
+          fxLayoutAlign="center"
+          style="padding: 16px; "
+        >
+          <form class="example-form">
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <span
+                style="font-size: 20px; font-weight: bold; margin-top: 20px;"
+              >
+                Project Title
+              </span>
+              <mat-form-field appearance="fill">
+                <input  [(ngModel)]="projectN.projectTitle" name="projectTitle"  matInput />
+              </mat-form-field>
+            </div>
+
+            <br />
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <span
+                style="font-size: 20px; font-weight: bold; margin-top: 20px;"
+              >
+                Project Start Date
+              </span>
+              <mat-form-field style="width: 200px;" appearance="fill">
+                  <mat-label>Choose a date</mat-label>
+                  <input  [(ngModel)]="projectN.startDate" name="startDate" matInput [matDatepicker]="picker">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <br />
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <span
+                style="font-size: 20px; font-weight: bold; margin-top: 20px;"
+              >
+                Project Finish Date
+              </span>
+              <mat-form-field style="width: 200px;" appearance="fill">
+                  <mat-label>Choose a date</mat-label>
+                  <input  [(ngModel)]="projectN.finishDate" name="finishDate" matInput [matDatepicker]="picker2">
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <br />
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <span
+                style="font-size: 20px; font-weight: bold; margin-top: 20px;"
+              >
+                Project Objectives
+              </span>
+              <mat-form-field  appearance="fill">
+
+                <input [(ngModel)]="projectN.projectObjectives" name="projectObjectives" matInput />
+              </mat-form-field>
+            </div>
+            <br />
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <span
+                style="font-size: 20px; font-weight: bold; margin-top: 20px;"
+              >
+                Project Manager
+              </span>
+              <mat-form-field  appearance="fill">
+
+                <input [(ngModel)]="projectN.projectManager" name="projectManager" matInput />
+              </mat-form-field>
+            </div>
+            <br />
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <span
+                style="font-size: 20px; font-weight: bold; margin-top: 20px;"
+              >
+                Project Information
+              </span>
+              <mat-form-field appearance="fill">
+
+                <input [(ngModel)]="projectN.projectInformation" name="projectInformation" matInput />
+              </mat-form-field>
+            </div>
+            <br />
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <span
+                style="font-size: 20px; font-weight: bold; margin-top: 20px;"
+              >
+                Project Space Statments
+              </span>
+              <mat-form-field appearance="fill">
+
+                <input [(ngModel)]="projectN.projectSpaceStatments" name="projectSpaceStatments" matInput />
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-around">
+              <button mat-raised-button (click)="editProjectCharter(); editedProject.projectTitle =projectN.projectTitle; "
+              style="background-color: black; color:rgb(236, 219, 219); margin-top: 30px;">
+                Edit
+              </button>
+              <button mat-raised-button (click)="arrayRemove()"
+              style="background-color: black; color:rgb(236, 219, 219); margin-top: 30px;" >
+                  Delete
+                </button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+      <mat-card
+      *ngIf="projectN.introduction"
+        class="card3"
+        style="padding: 0 0 14px 0; width: 600px; height: 800px;"
+      >
+        <mat-card-title style="color: white; padding: 1em; text-align: center;">
+            Software Requirements Specification (SRS)
+        </mat-card-title>
+        <mat-card-content
+          fxLayout="row"
+          fxLayoutAlign="center"
+          style="padding: 16px; "
+        >
+          <form class="example-form">
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <span
+                style="font-size: 20px; font-weight: bold; margin-top: 20px;"
+              >
+                Introduction
+              </span>
+              <mat-form-field appearance="fill">
+                <input  [(ngModel)]="projectN.introduction" name="introduction"  matInput />
+              </mat-form-field>
+            </div>
+
+            <br />
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <span
+                  style="font-size: 20px; font-weight: bold; margin-top: 20px;"
+                >
+                  Purpose of software being developed
+                </span>
+                <mat-form-field appearance="fill">
+
+                    <input [(ngModel)]="projectN.posb" name="posb" matInput />
+                  </mat-form-field>
+              </div>
+              <br />
+              <div fxLayout="row" fxLayoutAlign="space-between">
+                <span
+                  style="font-size: 20px; font-weight: bold; margin-top: 20px;"
+                >
+                  Intendend Audience
+                </span>
+                <mat-form-field appearance="fill">
+
+                    <input [(ngModel)]="projectN.ia" name="ia" matInput />
+                  </mat-form-field>
+              </div>
+              <br />
+              <div fxLayout="row" fxLayoutAlign="space-between">
+                <span
+                  style="font-size: 20px; font-weight: bold; margin-top: 20px;"
+                >
+                  Overall description of the software
+                </span>
+                <mat-form-field appearance="fill">
+
+                  <input [(ngModel)]="projectN.ods" name="ods" matInput />
+                </mat-form-field>
+              </div>
+              <br />
+              <div fxLayout="row" fxLayoutAlign="space-between">
+                <span
+                  style="font-size: 20px; font-weight: bold; margin-top: 20px;"
+                >
+                  System Features and Requirements
+                </span>
+                <mat-form-field appearance="fill">
+                    <mat-label>Textarea</mat-label>
+                    <textarea [(ngModel)]="projectN.sfr" name="sfr" matInput></textarea>
+                  </mat-form-field>
+              </div>
+              <br />
+            <div fxLayout="row" fxLayoutAlign="space-around">
+              <button mat-raised-button (click)="editSRS()"
+              style="background-color: black; color:rgb(236, 219, 219); margin-top: 30px;">
+                Edit
+              </button>
+              <button mat-raised-button (click)="arraySRSRemove()"
+              style="background-color: black; color:rgb(236, 219, 219); margin-top: 30px;" >
+                  Delete
+                </button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+  </div>
+</div>
+

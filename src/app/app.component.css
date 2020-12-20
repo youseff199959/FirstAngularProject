@@ -1,0 +1,53 @@
+.topnav{
+    background-color: rgb(94, 104, 116);
+    overflow: hidden;
+}
+
+.topnav a {
+    color: #f2f2f2;
+    text-align: center;
+    padding: 19px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    margin: 6px;
+  }
+
+  .topnav a:hover {
+    background-color: rgba(221, 221, 221, 0.185);
+    color: black;
+  }
+
+.topnav a.active {
+  float: right;
+
+}
+
+p{
+    float: left;
+    text-align: center;
+    text-decoration:none ;
+    font-size: 18px;
+    padding: 19px 16px;
+    margin: 6px;
+    color: #f2f2f2;
+
+}
+
+.mat-button
+{
+  float: right;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 19px 16px;
+  text-decoration: none;
+  font-size: 18px;
+  margin: 6px;
+}
+
+.row
+{
+    display: flex;
+    flex-direction: row;
+}
+
+
